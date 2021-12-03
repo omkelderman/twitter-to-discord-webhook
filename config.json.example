@@ -1,0 +1,30 @@
+{
+    "twitter": {
+        "consumer_key": "...",
+        "consumer_secret": "...",
+        "token": "...",
+        "token_secret": "..."
+    },
+    "hooksPerTwitterAccount": {
+        "1234": [
+            {
+                "id": "123456",
+                "token": "xxxxxxxxxx"
+            },
+            {
+                "id": "123456",
+                "token": "xxxxxxxxxx"
+            }
+        ],
+        "4567": [
+            {
+                "id": "123456",
+                "token": "xxxxxxxxxx"
+            },
+            {
+                "id": "123456",
+                "token": "xxxxxxxxxx"
+            }
+        ]
+    }
+}
