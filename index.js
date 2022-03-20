@@ -14,8 +14,17 @@ t.on('tweet', tweet => {
         return;
     }
 
-    if(tweet.in_reply_to_user_id_str && tweet.in_reply_to_user_id_str != tweet.user.id_str) {
+    if (tweet.in_reply_to_user_id_str && tweet.in_reply_to_user_id_str != tweet.user.id_str) {
         console.log(`[${tweet.id_str}] tweet is a reply to someone else, ignore tweet`)
+        return;
+    }
+
+    if (tweet.entities
+        && tweet.entities.user_mentions
+        && tweet.entities.user_mentions.length
+        && tweet.entities.user_mentions.some(userMention => userMention.indices[0] === 0 && userMention.id_str != tweet.user.id_str)
+    ) {
+        console.log(`[${tweet.id_str}] tweet starts with a mention to someone else, ignore tweet`)
         return;
     }
 
@@ -32,7 +41,7 @@ t.on('tweet', tweet => {
             url: `https://discord.com/api/webhooks/${discordWebhook.id}/${discordWebhook.token}`,
             json: discordWebhookObject
         }, (err, resp) => {
-            if(err) {
+            if (err) {
                 console.log(`[${tweet.id_str}] [${discordWebhook.id}] shooting webhook error`, err);
                 return;
             }
